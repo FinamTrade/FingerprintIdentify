@@ -98,6 +98,21 @@ public abstract class BaseFingerprint {
         cancelIdentify();
     }
 
+    protected void onUserCancelled() {
+        if (mIsCanceledIdentify) {
+            return;
+        }
+
+        if (mIdentifyListener != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mIdentifyListener.onUserCancelled();
+                }
+            });
+        }
+    }
+
     protected void onNotMatch() {
         if (mIsCanceledIdentify) {
             return;
@@ -187,6 +202,8 @@ public abstract class BaseFingerprint {
 
     public interface IdentifyListener {
         void onSucceed();
+
+        void onUserCancelled();
 
         void onNotMatch(int availableTimes);
 
