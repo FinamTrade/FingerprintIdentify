@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'digital.wup.android-maven-publish'
 
 android {
     compileSdkVersion 28
@@ -35,11 +35,19 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
 
-publish {
-    userOrg = 'uccmawei'
-    groupId = 'com.wei.android.lib'
-    artifactId = 'fingerprintidentify'
-    publishVersion = '1.2.6'
-    desc = 'Android fingerprint api for Android, Samsung, MeiZu.'
-    website = 'https://github.com/uccmawei/FingerprintIdentify'
+publishing {
+    repositories {
+        maven {
+            url deployer_url
+        }
+    }
+    publications {
+        mavenAar(MavenPublication) {
+            groupId = 'com.wei.android.lib'
+            artifactId = 'FingerprintIdentify'
+            version "$version_override"
+
+            from components.android
+        }
+    }
 }
