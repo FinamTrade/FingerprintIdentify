@@ -1,14 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'digital.wup.android-maven-publish'
 
+def buildNumber = System.env.BUILD_NUMBER != null ? System.env.BUILD_NUMBER as int : 1
+
 android {
     compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode buildNumber
+        versionName version_base
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,7 +47,7 @@ publishing {
         mavenAar(MavenPublication) {
             groupId = 'com.wei.android.lib'
             artifactId = 'FingerprintIdentify'
-            version "$version_override"
+            version "$version_base.$buildNumber-finam"
 
             from components.android
         }
