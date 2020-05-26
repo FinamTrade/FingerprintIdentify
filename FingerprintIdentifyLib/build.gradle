@@ -46,7 +46,7 @@ publishing {
     publications {
         mavenAar(MavenPublication) {
             groupId = 'com.wei.android.lib'
-            artifactId = 'FingerprintIdentify'
+            artifactId = 'fingerprintidentify'
             version "$version_base.$buildNumber-finam"
 
             from components.android
